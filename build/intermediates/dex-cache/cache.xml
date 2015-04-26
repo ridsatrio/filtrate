@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/pre-dexed/debug/classes-e04dc404716e378fb3455239f63a47e17e06f74d.jar" />
+    </item>
+    <item
+        jar="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/exploded-aar/Filtrate/library/unspecified/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="005cb66c33ccdbe81f9385feaecc7f6b1d6c5da8">
+        <dex dex="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/pre-dexed/debug/classes-94b50c2401e7985c72308d41cd61c2edddf28702.jar" />
+    </item>
+    <item
+        jar="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-dcf8c1a2f59df5dc73b3cf62c098ca1a7759f392.jar" />
+    </item>
+    <item
+        jar="/usr/local/android/android-sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-08ad161255c4cf99b877369f6765cf4a3d504301.jar" />
+    </item>
+    <item
+        jar="/home/ridsatrio/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/6.1.0/63735f48b82bcd24cdd33821342428252eb1ca5a/butterknife-6.1.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="63735f48b82bcd24cdd33821342428252eb1ca5a">
+        <dex dex="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/pre-dexed/debug/butterknife-6.1.0-99670c62995681e6e2408f94aca5b99467019d45.jar" />
+    </item>
+    <item
+        jar="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/home/ridsatrio/Projects/Android/Filtrate/sample/build/intermediates/pre-dexed/debug/classes-95cb9eac5ae81605945bc669d4b8f1c91e6be469.jar" />
+    </item>
+
+</items>
