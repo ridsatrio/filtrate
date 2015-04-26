@@ -101,7 +101,7 @@ public final class Filtrate {
      * Define how many app launches before Filtrate should show the first rating prompt. This value
      * will only be used once-next appearances threshold will be calculated in respect to this and
      * the RetryPolicy used.
-     * <br/><br/>
+     *
      * The default value set for this behaviour is 5 launches.
      *
      * @param launchThreshold App launches until the first prompt appearance.
@@ -114,7 +114,7 @@ public final class Filtrate {
     /**
      * Define how Filtrate would attempt to retry prompting the user in case the last prompt got
      * skipped.
-     * <br/><br/>
+     *
      * The default value set for this behaviour is to retry incrementally (RetryPolicy.INCREMENTAL).
      *
      * @param retryPolicy The RetryPolicy to govern prompt retries.
@@ -128,7 +128,7 @@ public final class Filtrate {
      * Define how many star(s) should be considered "acceptable". User ratings that were above this
      * threshold will fire up the onRatedAboveThreshold method defined in the listener. Likewise,
      * user ratings that were below this threshold will fire up the onRatedBelowThreshold method.
-     * <br/><br/>
+     *
      * The default value set for this behaviour is 3 stars.
      *
      * @param rateThreshold How many stars Filtrate should consider "acceptable".
@@ -143,7 +143,7 @@ public final class Filtrate {
 
     /**
      * Set a label text to the rating prompt to replace the default string.
-     * <br/><br/>
+     *
      * The default value is "How would you rate this app?".
      *
      * @param ratePromptText Label text to be set onto the skip button.
@@ -157,7 +157,7 @@ public final class Filtrate {
 
     /**
      * Set a label text to the skip button to replace the default string.
-     * <br/>
+     *
      * The default value set is "Skip".
      *
      * @param skipButtonText Text to be set to the skip button.
