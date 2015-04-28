@@ -7,14 +7,22 @@ A simple rating reminder that filters incoming input.
 
 ## Download
 
-A JCenter repo will be provided once the API has reached a more stable state. In the mean time, you
-would need to download the source and merge it to your project yourself in order to use it.
+Just add the dependency to your build.gradle:
+
+```groovy
+dependencies {
+    compile 'id.ridsatrio.filtrate:library:0.+'
+}
+
+```
+
+Alternatively, you could also download the .aar file over at [BinTray](https://bintray.com/ridsatrio/maven/Filtrate/view).
 
 ## Usage
 
 Filtrate can be used with just a few method calls like below:
 
-```
+```java
 class SampleActivity extends FragmentActivity implements OnRateListener {
 
     @Override
@@ -45,7 +53,7 @@ described below.
 Filtrate comes predefined with a default behaviour so that it can be used almost instantly. However
 you can use these API to alter them to your liking:
 
-```
+```java
 ...
 Filtrate.with(Activity, OnRateListener)
         .setRateCancelListener(OnRateCancelListener) // Set an optional listener to handle prompt dismissal.
