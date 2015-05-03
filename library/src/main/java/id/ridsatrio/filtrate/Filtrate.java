@@ -43,9 +43,9 @@ public final class Filtrate {
 
     /* Preference Keys */
     public static final String PREF_FILENAME = "id.ridsatrio.filtrate";
-    public static final String PREF_KEY_SHOULD_MONITOR = "id.ridsatrio.rater.shouldmonitor";
-    public static final String PREF_KEY_LAUNCH_COUNT = "id.ridsatrio.rater.launchcount";
-    public static final String PREF_KEY_SKIP_COUNT = "id.ridsatrio.rater.skipcount";
+    public static final String PREF_KEY_SHOULD_MONITOR = "id.ridsatrio.filtrate.shouldmonitor";
+    public static final String PREF_KEY_LAUNCH_COUNT = "id.ridsatrio.filtrate.launchcount";
+    public static final String PREF_KEY_SKIP_COUNT = "id.ridsatrio.filtrate.skipcount";
 
     private FragmentActivity mActivity;
     private RetryPolicy mRetryPolicy = RetryPolicy.INCREMENTAL;
