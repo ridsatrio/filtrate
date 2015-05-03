@@ -197,7 +197,7 @@ public final class Filtrate {
     /**
      * Returns the amount of time user has skipped the rating prompt.
      */
-    public int getSkipcount() {
+    public int getSkipCount() {
         return mPrefs.getInt(PREF_KEY_SKIP_COUNT, 0);
     }
 
@@ -211,7 +211,7 @@ public final class Filtrate {
             return -1;
         }
         int thresholdSteps = mInitialThreshold;
-        int skipCount = getSkipcount();
+        int skipCount = getSkipCount();
         if (skipCount < 1) {
             return thresholdSteps;
         } else {
@@ -256,7 +256,7 @@ public final class Filtrate {
     protected class RatePromptDialog extends DialogFragment
             implements View.OnClickListener, RatingBar.OnRatingBarChangeListener {
 
-        RatingBar mRbRatebar;
+        RatingBar mRbRateBar;
         Button mBtnSkipRate;
         TextView mTvRatePrompt;
 
@@ -275,8 +275,8 @@ public final class Filtrate {
             View view = inflater.inflate(R.layout.fragment_rate_dialog, container);
             mTvRatePrompt = (TextView) view.findViewById(R.id.tv_ratePrompt);
             mTvRatePrompt.setText(mPromptText);
-            mRbRatebar = (RatingBar) view.findViewById(R.id.rb_ratingBar);
-            mRbRatebar.setOnRatingBarChangeListener(this);
+            mRbRateBar = (RatingBar) view.findViewById(R.id.rb_ratingBar);
+            mRbRateBar.setOnRatingBarChangeListener(this);
             mBtnSkipRate = (Button) view.findViewById(R.id.btn_skipRating);
             mBtnSkipRate.setText(mSkipButtonText);
             mBtnSkipRate.setOnClickListener(this);
@@ -311,7 +311,7 @@ public final class Filtrate {
                         editor.commit();
                         break;
                     default:
-                        int skipCount = getSkipcount();
+                        int skipCount = getSkipCount();
                         editor.putInt(PREF_KEY_SKIP_COUNT, skipCount + 1);
                         editor.commit();
                 }
