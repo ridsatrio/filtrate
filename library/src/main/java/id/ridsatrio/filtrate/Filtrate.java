@@ -58,7 +58,7 @@ public final class Filtrate {
     private String mPromptText = "How would you rate this app?";
     private String mSkipButtonText = "Not now";
     private Theme mTheme = Theme.LIGHT;
-    private int mRateBarColor = Color.parseColor("#FFC107");
+    private int mRatingBarColor = Color.parseColor("#FFC107");
 
     /* Shared Preferences */
     private SharedPreferences mPrefs;
@@ -148,6 +148,36 @@ public final class Filtrate {
     }
 
     /**
+     * Set a theme for the rating prompt.
+     *
+     * The default value set Theme.LIGHT.
+     *
+     * @param theme Theme that will be used. Can be Theme.LIGHT or Theme.DARK.
+     * */
+    public Filtrate setTheme(Theme theme) {
+        if (theme == null) {
+            throw new IllegalArgumentException("Theme can not be null.");
+        }
+        mTheme = theme;
+        return this;
+    }
+
+    /**
+     * Set a color for stars in the rating prompt.
+     *
+     * The default value set is #FFC107 ("Amber 500" in Material Design spec).
+     *
+     * @param color Color to be set on the stars (as hexadecimal int).
+     * */
+    public Filtrate setRatingBarColor(int color) {
+        if (color == 0) {
+            throw new IllegalArgumentException("Color can not be null.");
+        }
+        mRatingBarColor = color;
+        return this;
+    }
+
+    /**
      * Set a label text to the rating prompt to replace the default string.
      *
      * The default value is "How would you rate this app?".
@@ -172,36 +202,6 @@ public final class Filtrate {
         if (skipButtonText != null && !"".equals(skipButtonText)) {
             mSkipButtonText = skipButtonText;
         }
-        return this;
-    }
-
-    /**
-     * Set a theme for the rating prompt.
-     *
-     * The default value set Theme.LIGHT.
-     *
-     * @param theme Theme that will be used. Can be Theme.LIGHT or Theme.DARK.
-     * */
-    public Filtrate setTheme(Theme theme) {
-        if (theme == null) {
-            throw new IllegalArgumentException("Theme can not be null.");
-        }
-        mTheme = theme;
-        return this;
-    }
-
-    /**
-     * Set a color for stars in the rating prompt.
-     *
-     * The default value set is #FFC107 ("Amber 500" in Material Design spec).
-     *
-     * @param color Color to be set on the stars (as hexadecimal int).
-     * */
-    public Filtrate setRateBarColor(int color) {
-        if (color == 0) {
-            throw new IllegalArgumentException("Color can not be null.");
-        }
-        mRateBarColor = color;
         return this;
     }
 
@@ -268,7 +268,7 @@ public final class Filtrate {
      */
     public void forceShow() {
         FragmentManager manager = mActivity.getSupportFragmentManager();
-        new RatePromptDialog().show(manager, "id.ridsatrio.filtrate.ratedialog");
+        new RatePromptDialog().show(manager, "id.ridsatrio.filtrate.ratingprompt");
     }
 
     /**
@@ -292,7 +292,7 @@ public final class Filtrate {
     protected class RatePromptDialog extends DialogFragment
             implements View.OnClickListener, RatingBar.OnRatingBarChangeListener {
 
-        RatingBar mRbRateBar;
+        RatingBar mRbRatingBar;
         Button mBtnSkipRate;
         TextView mTvRatePrompt;
 
@@ -324,15 +324,15 @@ public final class Filtrate {
             View view = localInflater.inflate(R.layout.fragment_rate_dialog, container, false);
             mTvRatePrompt = (TextView) view.findViewById(R.id.tv_ratePrompt);
             mTvRatePrompt.setText(mPromptText);
-            mRbRateBar = (RatingBar) view.findViewById(R.id.rb_ratingBar);
-            mRbRateBar.setOnRatingBarChangeListener(this);
+            mRbRatingBar = (RatingBar) view.findViewById(R.id.rb_ratingBar);
+            mRbRatingBar.setOnRatingBarChangeListener(this);
             mBtnSkipRate = (Button) view.findViewById(R.id.btn_skipRating);
             mBtnSkipRate.setText(mSkipButtonText);
             mBtnSkipRate.setOnClickListener(this);
 
-            LayerDrawable progress = (LayerDrawable) mRbRateBar.getProgressDrawable();
-            DrawableCompat.setTint(progress.getDrawable(2), mRateBarColor);
-            DrawableCompat.setTint(progress.getDrawable(1), mRateBarColor);
+            LayerDrawable progress = (LayerDrawable) mRbRatingBar.getProgressDrawable();
+            DrawableCompat.setTint(progress.getDrawable(2), mRatingBarColor);
+            DrawableCompat.setTint(progress.getDrawable(1), mRatingBarColor);
             DrawableCompat.setTint(progress.getDrawable(0), Color.GRAY);
 
             return view;
