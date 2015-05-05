@@ -19,11 +19,14 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -55,6 +58,7 @@ public final class Filtrate {
     private String mPromptText = "How would you rate this app?";
     private String mSkipButtonText = "Not now";
     private Theme mTheme = Theme.LIGHT;
+    private int mRateBarColor = Color.parseColor("#FFC107");
 
     /* Shared Preferences */
     private SharedPreferences mPrefs;
@@ -187,6 +191,21 @@ public final class Filtrate {
     }
 
     /**
+     * Set a color for stars in the rating prompt.
+     *
+     * The default value set is #FFC107 ("Amber 500" in Material Design spec).
+     *
+     * @param color Color to be set on the stars (as hexadecimal int).
+     * */
+    public Filtrate setRateBarColor(int color) {
+        if (color == 0) {
+            throw new IllegalArgumentException("Color can not be null.");
+        }
+        mRateBarColor = color;
+        return this;
+    }
+
+    /**
      * Start the launch-checking sequence and show a rating prompt if the prerequisites are all met.
      */
     public void checkAndShowIfQualify() {
@@ -310,6 +329,12 @@ public final class Filtrate {
             mBtnSkipRate = (Button) view.findViewById(R.id.btn_skipRating);
             mBtnSkipRate.setText(mSkipButtonText);
             mBtnSkipRate.setOnClickListener(this);
+
+            LayerDrawable progress = (LayerDrawable) mRbRateBar.getProgressDrawable();
+            DrawableCompat.setTint(progress.getDrawable(2), mRateBarColor);
+            DrawableCompat.setTint(progress.getDrawable(1), mRateBarColor);
+            DrawableCompat.setTint(progress.getDrawable(0), Color.GRAY);
+
             return view;
         }
 
