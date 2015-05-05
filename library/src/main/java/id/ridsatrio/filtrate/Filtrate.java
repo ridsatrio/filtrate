@@ -25,6 +25,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public final class Filtrate {
     private int mRateThreshold = 3;
     private String mPromptText = "How would you rate this app?";
     private String mSkipButtonText = "Not now";
+    private Theme mTheme = Theme.LIGHT;
 
     /* Shared Preferences */
     private SharedPreferences mPrefs;
@@ -170,6 +172,21 @@ public final class Filtrate {
     }
 
     /**
+     * Set a theme for the rating prompt.
+     *
+     * The default value set Theme.LIGHT.
+     *
+     * @param theme Theme that will be used. Can be Theme.LIGHT or Theme.DARK.
+     * */
+    public Filtrate setTheme(Theme theme) {
+        if (theme == null) {
+            throw new IllegalArgumentException("Theme can not be null.");
+        }
+        mTheme = theme;
+        return this;
+    }
+
+    /**
      * Start the launch-checking sequence and show a rating prompt if the prerequisites are all met.
      */
     public void checkAndShowIfQualify() {
@@ -272,7 +289,20 @@ public final class Filtrate {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                                  @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_rate_dialog, container);
+            Context contextThemeWrapper = null;
+            switch (mTheme) {
+                case LIGHT:
+                    contextThemeWrapper = new ContextThemeWrapper(getActivity(),
+                            android.R.style.Theme_DeviceDefault_Light);
+                    break;
+                case DARK:
+                    contextThemeWrapper = new ContextThemeWrapper(getActivity(),
+                            android.R.style.Theme_DeviceDefault);
+                    break;
+            }
+
+            LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+            View view = localInflater.inflate(R.layout.fragment_rate_dialog, container, false);
             mTvRatePrompt = (TextView) view.findViewById(R.id.tv_ratePrompt);
             mTvRatePrompt.setText(mPromptText);
             mRbRateBar = (RatingBar) view.findViewById(R.id.rb_ratingBar);
