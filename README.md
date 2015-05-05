@@ -60,6 +60,8 @@ Filtrate.with(Activity, OnRateListener)
         .setInitialLaunchThreshold(int) // Set how many launch before the first prompt should show up.
         .setRetryPolicy(RetryPolicy) // Set how Filtrate should retry when user dismissed the prompt.
         .setAcceptableRateThreshold(int) // Set how many stars should be considered "acceptable".
+NEW ->  .setTheme(Theme) // Set a theme for the rating prompt. The options are Theme.LIGHT (default) and Theme.DARK.
+NEW ->  .setRatingBarColor(int) // Set a color for the rating bar (the stars).
         .setRatePromptText(String) // Set an optional prompt text to replace the default.
         .setSkipButtonText(String) // Set an optional skip button text to replace the default.
         .checkAndShowIfQualify();
