@@ -19,12 +19,16 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +57,8 @@ public final class Filtrate {
     private int mRateThreshold = 3;
     private String mPromptText = "How would you rate this app?";
     private String mSkipButtonText = "Not now";
+    private Theme mTheme = Theme.LIGHT;
+    private int mRateBarColor = Color.parseColor("#FFC107");
 
     /* Shared Preferences */
     private SharedPreferences mPrefs;
@@ -170,6 +176,36 @@ public final class Filtrate {
     }
 
     /**
+     * Set a theme for the rating prompt.
+     *
+     * The default value set Theme.LIGHT.
+     *
+     * @param theme Theme that will be used. Can be Theme.LIGHT or Theme.DARK.
+     * */
+    public Filtrate setTheme(Theme theme) {
+        if (theme == null) {
+            throw new IllegalArgumentException("Theme can not be null.");
+        }
+        mTheme = theme;
+        return this;
+    }
+
+    /**
+     * Set a color for stars in the rating prompt.
+     *
+     * The default value set is #FFC107 ("Amber 500" in Material Design spec).
+     *
+     * @param color Color to be set on the stars (as hexadecimal int).
+     * */
+    public Filtrate setRateBarColor(int color) {
+        if (color == 0) {
+            throw new IllegalArgumentException("Color can not be null.");
+        }
+        mRateBarColor = color;
+        return this;
+    }
+
+    /**
      * Start the launch-checking sequence and show a rating prompt if the prerequisites are all met.
      */
     public void checkAndShowIfQualify() {
@@ -272,7 +308,20 @@ public final class Filtrate {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                                  @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_rate_dialog, container);
+            Context contextThemeWrapper = null;
+            switch (mTheme) {
+                case LIGHT:
+                    contextThemeWrapper = new ContextThemeWrapper(getActivity(),
+                            android.R.style.Theme_DeviceDefault_Light);
+                    break;
+                case DARK:
+                    contextThemeWrapper = new ContextThemeWrapper(getActivity(),
+                            android.R.style.Theme_DeviceDefault);
+                    break;
+            }
+
+            LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+            View view = localInflater.inflate(R.layout.fragment_rate_dialog, container, false);
             mTvRatePrompt = (TextView) view.findViewById(R.id.tv_ratePrompt);
             mTvRatePrompt.setText(mPromptText);
             mRbRateBar = (RatingBar) view.findViewById(R.id.rb_ratingBar);
@@ -280,6 +329,12 @@ public final class Filtrate {
             mBtnSkipRate = (Button) view.findViewById(R.id.btn_skipRating);
             mBtnSkipRate.setText(mSkipButtonText);
             mBtnSkipRate.setOnClickListener(this);
+
+            LayerDrawable progress = (LayerDrawable) mRbRateBar.getProgressDrawable();
+            DrawableCompat.setTint(progress.getDrawable(2), mRateBarColor);
+            DrawableCompat.setTint(progress.getDrawable(1), mRateBarColor);
+            DrawableCompat.setTint(progress.getDrawable(0), Color.GRAY);
+
             return view;
         }
 
